@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Alumno {
+	private String dni;
 	private String nombre;
 	private String apellido;
 	private String direccionCalle;
@@ -13,11 +14,9 @@ public class Alumno {
 	private String direccionBarrio;
 	private String direccionCiudad;
 	private String direccionLocalidad;
-	private Integer direccionCP;
-	private String dni;
 	private LocalDate fechaNac;
 	private String telefono;
-	private String correoElectronico;
+	private String eMail;
 	private Boolean estado;
 	
 	public Alumno() {
@@ -80,14 +79,6 @@ public class Alumno {
 		this.direccionLocalidad = direccionLocalidad;
 	}
 
-	public Integer getDireccionCP() {
-		return direccionCP;
-	}
-
-	public void setDireccionCP(Integer direccionCP) {
-		this.direccionCP = direccionCP;
-	}
-
 	public String getDni() {
 		return dni;
 	}
@@ -112,12 +103,12 @@ public class Alumno {
 		this.telefono = telefono;
 	}
 
-	public String getCorreoElectronico() {
-		return correoElectronico;
+	public String geteMail() {
+		return eMail;
 	}
 
-	public void setCorreoElectronico(String correoElectronico) {
-		this.correoElectronico = correoElectronico;
+	public void setCorreoElectronico(String eMail) {
+		this.eMail = eMail;
 	}
 
 	public Boolean getEstado() {
