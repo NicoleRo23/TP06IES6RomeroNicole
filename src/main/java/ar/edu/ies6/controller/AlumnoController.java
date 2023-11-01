@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AlumnoController {
 
+	//Método para mostrar el formulario
 	@GetMapping({"/index", "/", "/home", "/alumno"})
 	public ModelAndView cargarAlumno() {
 		
@@ -29,6 +30,7 @@ public class AlumnoController {
 		return modelView;	
 	}
 	
+	//Método para procesar los datos del formulario
 	@PostMapping("/cargarAlumno")
     public ModelAndView cargarAlumno(@ModelAttribute("alumno") Alumno alumno) {
 		
@@ -40,5 +42,23 @@ public class AlumnoController {
 		
 		return modelView;	
 	}
+	
+	//Método para eliminar un registro
+	@GetMapping("/eliminarAlumno/{dni}")
+	public ModelAndView eliminarAlumno(@PathVariable Integer dni) {
+		
+		for (int i=0; i<ListadoAlumnos.getListado().size(); i++) {
+			if (ListadoAlumnos.getListado().get(i).getDni().equals(dni)) {
+				//ListadoAlumnos.getListado().get(i).setEstado(false);
+				ListadoAlumnos.getListado().remove(i);
+			}
+		}
+		ModelAndView modelView = new ModelAndView ("listadoAlumnos");
+		modelView.addObject("listado", ListadoAlumnos.getListado());
+		
+		return modelView;	
+	}
+	
+	//Método para modificar un registro
 	
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Alumno {
-	private String dni;
+	private Integer dni;
 	private String nombre;
 	private String apellido;
 	private String direccionCalle;
@@ -79,11 +79,11 @@ public class Alumno {
 		this.direccionLocalidad = direccionLocalidad;
 	}
 
-	public String getDni() {
+	public Integer getDni() {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDni(Integer dni) {
 		this.dni = dni;
 	}
 

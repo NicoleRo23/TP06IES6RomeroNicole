@@ -17,33 +17,34 @@
 			<tr>
 				<th>Nombre</th>
 				<th>Apellido</th>
+				<th>DNI</th>
+				<th>Fecha de Nacimiento</th>
 				<th>Calle</th>
 				<th>Número</th>
 				<th>Barrio</th>
 				<th>Ciudad</th>
 				<th>Localidad</th>
 				<th>Código Postal</th>
-				<th>DNI</th>
-				<th>Fecha de Nacimiento</th>
-				<th>Edad</th>
 				<th>Teléfono</th>
 				<th>eMail</th>
 				<th>Estado</th>
+				<th>Edición</th>
 			</tr>
 			<tr th:each="alumno:${listado}">
 				<td th:text="${alumno.nombre}"></td>
 				<td th:text="${alumno.apellido}"></td>
+				<td th:text="${alumno.dni}"></td>
+				<td th:text="${alumno.fechaNac}"></td>
 				<td th:text="${alumno.direccionCalle}"></td>
 				<td th:text="${alumno.direccionNumero}"></td>
 				<td th:text="${alumno.direccionBarrio}"></td>
 				<td th:text="${alumno.direccionCiudad}"></td>
 				<td th:text="${alumno.direccionLocalidad}"></td>
-				<td th:text="${alumno.dni}"></td>
-				<td th:text="${alumno.fechaNac}"></td>
-				<td th:text="${alumno.obtenerEdad()}"></td>
 				<td th:text="${alumno.telefono}"></td>
 				<td th:text="${alumno.eMail}"></td>
 				<td th:text="${alumno.estado}"></td>
+				<td><a type="button" class="btn btn-primary">Modificar</a></td>
+				<td><a type="button" class="btn btn-danger">Eliminar</a></td>
 			</tr>
 		</table>
 		<form>
