@@ -3,6 +3,7 @@ package ar.edu.ies6.controller;
 import ar.edu.ies6.model.Alumno;
 import ar.edu.ies6.service.AlumnoService;
 import ar.edu.ies6.util.ListadoAlumnos;
+import ch.qos.logback.core.model.Model;
 
 import java.time.LocalDate;
 
@@ -21,53 +22,54 @@ public class AlumnoController {
 	
 	@Autowired
 	AlumnoService alumnoService;
+	
+	@GetMapping({"/index"})
+	public String index(Model model) {
+		return "index";
+	}
 
-	//Método para mostrar el formulario
-	@GetMapping({"/index", "/", "/home", "/alumno"})
+	@GetMapping({"/alumno"})
 	public ModelAndView cargarAlumno() {
 		
-		//Alumno alu = new Alumno ();
+		//alu.setFechaNac(LocalDate.of(1988, 8, 20));
+		//System.out.println("Edad: "+alu.obtenerEdad());
 		
-		alu.setFechaNac(LocalDate.of(1988, 8, 20));
-		System.out.println("Edad: "+alu.obtenerEdad());
-		
-		ModelAndView modelView = new ModelAndView ("index");
-		
+		ModelAndView modelView = new ModelAndView ("alumno");
 		modelView.addObject("alumno", alu);
 		
 		return modelView;	
 	}
 	
-	//Método para procesar los datos del formulario
 	@PostMapping("/cargarAlumno")
-    public ModelAndView cargarAlumno(@ModelAttribute("alumno") Alumno alumno) {
+    public ModelAndView cargarAlumno(@ModelAttribute Alumno alumno) {
 		
-		ListadoAlumnos.getListado().add(alumno);
- 	
+		//ListadoAlumnos.getListado().add(alumno);
+		alumnoService.guardarAlumno(alumno);
         ModelAndView modelView = new ModelAndView ("listadoAlumnos");
-		
-		modelView.addObject("listado", ListadoAlumnos.getListado());
-		
+		//modelView.addObject("listado", ListadoAlumnos.getListado());
+        modelView.addObject("listado", alumnoService.buscarTodosAlumnos());
 		return modelView;	
 	}
 	
-	//Método para eliminar un registro
+	//Metodo para eliminar un registro
 	@GetMapping("/eliminarAlumno/{dni}")
-	public ModelAndView eliminarAlumno(@PathVariable Integer dni) {
+	public String eliminarAlumno(@PathVariable Integer dni) throws Exception {
+		alumnoService.eliminarAlumno(dni);
 		
-		for (int i=0; i<ListadoAlumnos.getListado().size(); i++) {
-			if (ListadoAlumnos.getListado().get(i).getDni().equals(dni)) {
-				//ListadoAlumnos.getListado().get(i).setEstado(false);
-				ListadoAlumnos.getListado().remove(i);
-			}
-		}
-		ModelAndView modelView = new ModelAndView ("listadoAlumnos");
-		modelView.addObject("listado", ListadoAlumnos.getListado());
-		
-		return modelView;	
+		return "redirect:/mostrarListado";	
 	}
 	
-	//Método para modificar un registro
+	@GetMapping("/mostrarListado")
+	public ModelAndView mostrarAlumnos(){
+
+		ModelAndView listado = new ModelAndView("listadoAlumnos");
+		listado.addObject("listado", alumnoService.buscarTodosAlumnos());
+		//listado.addObject("listado", ListadoAlumnos.getListado());
+		
+		return listado;	
+	}
+	
+	//Metodo para modificar alumno
 	@GetMapping("/modificarAlumno/{dni}")
 	public ModelAndView modificarAlumno(@PathVariable Integer dni) throws Exception {
 		
@@ -86,5 +88,6 @@ public class AlumnoController {
 		//modelView.addObject("listado", ListadoAlumnos.getListado());
         modelView.addObject("listado", alumnoService.buscarTodosAlumnos());
 		return modelView;	
-	}	
+	}
+	
 }

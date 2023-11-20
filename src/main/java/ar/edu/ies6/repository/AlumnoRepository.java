@@ -11,5 +11,3 @@ import ar.edu.ies6.model.Alumno;
 public interface AlumnoRepository extends CrudRepository <Alumno, Integer>{
 	public List<Alumno> findByEstado(Boolean estado);
 }
-
-

@@ -10,4 +10,3 @@ public interface DocenteRepository extends CrudRepository <Docente, Integer>{
 	public List<Docente> findByEstado(Boolean estado);
 	
 }
-

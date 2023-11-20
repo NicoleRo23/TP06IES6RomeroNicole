@@ -4,19 +4,39 @@ import java.time.LocalDate;
 import java.time.Period;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 @Component
 public class Alumno {
-	private Integer dni;
+	@Column
 	private String nombre;
+	@Column
 	private String apellido;
+	@Column
 	private String direccionCalle;
+	@Column
 	private Integer direccionNumero;
+	@Column
 	private String direccionBarrio;
+	@Column
 	private String direccionCiudad;
+	@Column
 	private String direccionLocalidad;
+	@Column
+	private Integer direccionCP;
+	@Id
+	//@GenerateValue (strategy = GenerationType.AUTO)
+	private Integer dni;
+	@Column
 	private LocalDate fechaNac;
+	@Column
 	private String telefono;
-	private String eMail;
+	@Column
+	private String correoElectronico;
+	@Column
 	private Boolean estado;
 	
 	public Alumno() {
@@ -79,6 +99,14 @@ public class Alumno {
 		this.direccionLocalidad = direccionLocalidad;
 	}
 
+	public Integer getDireccionCP() {
+		return direccionCP;
+	}
+
+	public void setDireccionCP(Integer direccionCP) {
+		this.direccionCP = direccionCP;
+	}
+
 	public Integer getDni() {
 		return dni;
 	}
@@ -103,12 +131,12 @@ public class Alumno {
 		this.telefono = telefono;
 	}
 
-	public String geteMail() {
-		return eMail;
+	public String getCorreoElectronico() {
+		return correoElectronico;
 	}
 
-	public void setCorreoElectronico(String eMail) {
-		this.eMail = eMail;
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
 	}
 
 	public Boolean getEstado() {
@@ -130,3 +158,4 @@ public class Alumno {
 	}
 
 }
+
